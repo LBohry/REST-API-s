@@ -2,10 +2,19 @@ const express = require("express");
 const Comment = require("../models/Comment");
 const comments_router = express.Router();
 
-//Get all comments by postId
+//Get all comments
+comments_router.get("/", async (req, res) => {
+  try {
+    const comments = await Comment.find();
+    res.json(comments);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
+
+//Get comments by postId
 comments_router.get("/:postId", async (req, res) => {
   try {
-    //map posts with userId
     const comments = await Comment.find({ postId: req.params.postId });
     res.json(comments);
   } catch (err) {
@@ -16,8 +25,8 @@ comments_router.get("/:postId", async (req, res) => {
 //Specific comment by id
 comments_router.get("/:_id", async (req, res) => {
   try {
-    const comments = await Comment.findById(req.params._id);
-    res.json(comments);
+    const comment = await Comment.findById(req.params._id);
+    res.json(comment);
   } catch (err) {
     res.json({ message: err });
   }
