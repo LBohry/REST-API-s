@@ -19,6 +19,7 @@ app.use(bodyParser.json());
 app.get("/", (req, res) => {
   res.send("fl dar");
 });
+
 app.use("/posts", postsRoute);
 app.use("/users", usersRoute);
 app.use("/comments", commentsRoute);
