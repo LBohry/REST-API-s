@@ -12,6 +12,16 @@ posts_router.get("/", async (req, res) => {
   }
 });
 
+//Get post by id
+posts_router.get("/:_id", async (req, res) => {
+  try {
+    const posts = await Post.findById(req.params._id);
+    res.json(posts);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
+
 //Specific posts by userId
 posts_router.get("/:userId", async (req, res) => {
   try {

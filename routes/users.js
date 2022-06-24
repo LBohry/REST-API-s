@@ -15,7 +15,7 @@ users_router.get("/", async (req, res) => {
 //Specific User
 users_router.get("/:_id", async (req, res) => {
   try {
-    const user = await User.findById(req.params._id); //create model User, kima Post
+    const user = await User.findById(req.params._id);
     res.json(user);
   } catch (err) {
     res.json({ message: err });
@@ -30,7 +30,7 @@ users_router.post("/", async (req, res) => {
     username: jdid.username,
     email: jdid.email,
     phone: jdid.phone,
-    job: jdid.job, //check l schema kifeh fl User
+    job: jdid.job,
   });
 
   try {
@@ -40,6 +40,7 @@ users_router.post("/", async (req, res) => {
     message: err;
   }
 });
+
 //update User
 users_router.patch("/:_id", async (req, res) => {
   try {
@@ -53,6 +54,7 @@ users_router.patch("/:_id", async (req, res) => {
     message: err;
   }
 });
+
 //delete User
 users_router.delete("/:_id", async (req, res) => {
   try {

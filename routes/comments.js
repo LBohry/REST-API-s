@@ -12,16 +12,6 @@ comments_router.get("/", async (req, res) => {
   }
 });
 
-//Get comments by postId
-comments_router.get("/:postId", async (req, res) => {
-  try {
-    const comments = await Comment.find({ postId: req.params.postId });
-    res.json(comments);
-  } catch (err) {
-    res.json({ message: err });
-  }
-});
-
 //Specific comment by id
 comments_router.get("/:_id", async (req, res) => {
   try {
@@ -32,8 +22,17 @@ comments_router.get("/:_id", async (req, res) => {
   }
 });
 
-//add Comment
+//Get comments by postId
+comments_router.get("/:postId", async (req, res) => {
+  try {
+    const comments = await Comment.find({ postId: req.params.postId });
+    res.json(comments);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
 
+//add Comment
 comments_router.post("/", async (req, res) => {
   const jdid = req.body;
   const comment = new Comment({
@@ -53,7 +52,7 @@ comments_router.post("/", async (req, res) => {
 //delete comment
 comments_router.delete("/:_id", async (req, res) => {
   try {
-    const removedcomment = await Post.remove({ _id: req.params._id });
+    const removedcomment = await Comment.remove({ _id: req.params._id });
     res.json(removedcomment);
   } catch (err) {
     res.json({ message: err });
@@ -63,7 +62,7 @@ comments_router.delete("/:_id", async (req, res) => {
 //update comment
 comments_router.patch("/:_id", async (req, res) => {
   try {
-    const updatedcomment = await Post.findByIdAndUpdate(
+    const updatedcomment = await Comment.findByIdAndUpdate(
       req.params._id,
       req.body,
       {
